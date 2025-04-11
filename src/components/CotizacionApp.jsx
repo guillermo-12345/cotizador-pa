@@ -233,7 +233,8 @@ export default function CotizacionApp() {
 
       <div className="text-right space-y-1">
         <p><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</p>
-        <p><strong>IVA (21%):</strong> ${iva.toFixed(2)}</p>
+        <p><strong>Costo Logístico:</strong> ${logisticaCosto.toFixed(2)}</p>
+        <p><strong>IVA:</strong> ${iva.toFixed(2)}</p>
         <p className="text-xl font-bold">Total: ${total.toFixed(2)}</p>
       </div>
 
