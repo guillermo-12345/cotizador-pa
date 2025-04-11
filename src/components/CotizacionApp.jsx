@@ -37,21 +37,21 @@ export default function CotizacionApp() {
 
     const img = new Image();
     img.src = logo;
-    doc.addImage(img, 'PNG', centerX - 50, 30, 100, 30);
+    doc.addImage(img, 'PNG', centerX - 50, 30, 90, 40);
 
-    let currentY = 90;
+    let currentY = 120;
 
     doc.setFontSize(11);
     doc.setTextColor(0);
     const fechaFormat = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
     if (fechaFormat) {
-      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "center" });
-      currentY += 20;
+      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "end" });
+      currentY += 40;
     }
 
     doc.setFontSize(13);
     doc.setFont(undefined, 'bold');
-    doc.text(`COTIZACIÓN PARA: ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
+    doc.text(`Cotización a ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
     currentY += 30;
 
     doc.setFontSize(11);
@@ -88,7 +88,7 @@ export default function CotizacionApp() {
     if (logistica > 0) {
       doc.text(`Costo logístico (${logistica}%): $${logisticaCosto.toFixed(2)}`, 400, summaryY + 14);
     }
-    doc.text(`IVA (16%): $${iva.toFixed(2)}`, 400, summaryY + (logistica > 0 ? 28 : 14));
+    doc.text(`IVA: $${iva.toFixed(2)}`, 400, summaryY + (logistica > 0 ? 28 : 14));
     doc.text(`Total: $${total.toFixed(2)}`, 400, summaryY + (logistica > 0 ? 42 : 28));
 
     const condiciones = [
