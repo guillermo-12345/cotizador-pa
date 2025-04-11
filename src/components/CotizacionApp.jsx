@@ -45,7 +45,7 @@ export default function CotizacionApp() {
     doc.setTextColor(0);
     const fechaFormat = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
     if (fechaFormat) {
-      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "end" });
+      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "right" });
       currentY += 40;
     }
 
@@ -217,9 +217,11 @@ export default function CotizacionApp() {
             <tr key={idx} className="border-t">
               <td className="p-2">{p.codigo}</td>
               <td className="p-2">{p.descripcion}</td>
-              <td className="p-2">{p.cantidad}</td>
-              <td className="p-2">${p.precio.toFixed(2)}</td>
-              <td className="p-2">${(p.cantidad * p.precio).toFixed(2)}</td>
+              <td className="p-2">{p.cantidad.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td className="p-2">${p.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td className="p-2">${(p.cantidad * p.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+
+              
               <td className="p-2">
                 <button onClick={() => eliminarProducto(idx)} className="text-red-500 hover:underline">
                   Eliminar
@@ -231,10 +233,10 @@ export default function CotizacionApp() {
       </table>
 
       <div className="text-right space-y-1">
-        <p><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</p>
-        <p><strong>Costo Logístico:</strong> ${logisticaCosto.toFixed(2)}</p>
-        <p><strong>IVA:</strong> ${iva.toFixed(2)}</p>
-        <p className="text-xl font-bold">Total: ${total.toFixed(2)}</p>
+        <p><strong>Subtotal:</strong> ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <p><strong>Costo Logístico:</strong> ${logisticaCosto.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <p><strong>IVA:</strong> ${iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <p className="text-xl font-bold">Total: ${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
       </div>
 
       <button
