@@ -37,23 +37,25 @@ export default function CotizacionApp() {
 
     const img = new Image();
     img.src = logo;
-    doc.addImage(img, 'PNG', centerX - 50, 30, 100, 60);
+    doc.addImage(img, 'PNG', centerX - 50, 30, 90, 40);
 
-    let currentY = 190;
+    let currentY = 120;
 
     doc.setFontSize(11);
     doc.setTextColor(0);
     const fechaFormat = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
     const fechaFormat2 = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
     if (fechaFormat) {
-      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "center" });
-      currentY += 20;
+      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "end" });
+      currentY += 40;
     }
 
     doc.setFontSize(13);
     doc.setFont(undefined, 'bold');
     doc.text(`COTIZACIÓN PARA ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
     currentY += 30;
+
+   
 
     doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
