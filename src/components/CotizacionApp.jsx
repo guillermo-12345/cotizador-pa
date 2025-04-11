@@ -37,13 +37,14 @@ export default function CotizacionApp() {
 
     const img = new Image();
     img.src = logo;
-    doc.addImage(img, 'PNG', centerX - 50, 30, 100, 30);
+    doc.addImage(img, 'PNG', centerX - 50, 30, 100, 60);
 
-    let currentY = 90;
+    let currentY = 190;
 
     doc.setFontSize(11);
     doc.setTextColor(0);
     const fechaFormat = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
+    const fechaFormat2 = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
     if (fechaFormat) {
       doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "center" });
       currentY += 20;
@@ -51,7 +52,7 @@ export default function CotizacionApp() {
 
     doc.setFontSize(13);
     doc.setFont(undefined, 'bold');
-    doc.text(`COTIZACIÓN PARA: ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
+    doc.text(`COTIZACIÓN PARA ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
     currentY += 30;
 
     doc.setFontSize(11);
@@ -136,7 +137,7 @@ export default function CotizacionApp() {
     doc.setTextColor(100);
     doc.text("promoalternative.com | patycastro@promoalternative.com | Tel: 55 5097 5033 | Cel: 55 4340 1291", marginX, y);
 
-    const fileName = `Cotizacion_${cliente || 'Cliente'}_${fecha || 'Fecha'}.pdf`.replace(/\s+/g, '_');
+    const fileName = `Cotizacion_${cliente || 'Cliente'}_${fechaFormat2 || 'Fecha'}.pdf`.replace(/\s+/g, '_');
     doc.save(fileName);
   };
 
