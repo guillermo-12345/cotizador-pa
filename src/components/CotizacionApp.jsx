@@ -37,25 +37,22 @@ export default function CotizacionApp() {
 
     const img = new Image();
     img.src = logo;
-    doc.addImage(img, 'PNG', centerX - 50, 30, 90, 40);
+    doc.addImage(img, 'PNG', centerX - 50, 30, 100, 30);
 
-    let currentY = 120;
+    let currentY = 90;
 
     doc.setFontSize(11);
     doc.setTextColor(0);
     const fechaFormat = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
-    const fechaFormat2 = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
     if (fechaFormat) {
-      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "end" });
-      currentY += 40;
+      doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "center" });
+      currentY += 20;
     }
 
     doc.setFontSize(13);
     doc.setFont(undefined, 'bold');
-    doc.text(`COTIZACIÓN PARA ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
+    doc.text(`COTIZACIÓN PARA: ${cliente || 'Cliente'}`, centerX, currentY, { align: "center" });
     currentY += 30;
-
-   
 
     doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
@@ -139,7 +136,7 @@ export default function CotizacionApp() {
     doc.setTextColor(100);
     doc.text("promoalternative.com | patycastro@promoalternative.com | Tel: 55 5097 5033 | Cel: 55 4340 1291", marginX, y);
 
-    const fileName = `Cotizacion_${cliente || 'Cliente'}_${fechaFormat2 || 'Fecha'}.pdf`.replace(/\s+/g, '_');
+    const fileName = `Cotizacion_${cliente || 'Cliente'}_${fecha || 'Fecha'}.pdf`.replace(/\s+/g, '_');
     doc.save(fileName);
   };
 
@@ -190,9 +187,8 @@ export default function CotizacionApp() {
             className="w-full border p-2 rounded text-center pr-6"
           />
           <span className="absolute right-3 top-2.5 text-gray-500">%</span>
-        </div> 
-        </div> 
-
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-4">
         <input type="text" name="codigo" value={nuevoProducto.codigo} onChange={handleChange} placeholder="Código" className="border p-2 rounded col-span-1" />
