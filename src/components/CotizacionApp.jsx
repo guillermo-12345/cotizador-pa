@@ -44,6 +44,7 @@ export default function CotizacionApp() {
     doc.setFontSize(11);
     doc.setTextColor(0);
     const fechaFormat = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
+    const fechaFormat2 = fecha ? new Date(fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
     if (fechaFormat) {
       doc.text(`Ciudad de México, a ${fechaFormat}`, centerX, currentY, { align: "right" });
       currentY += 40;
@@ -84,12 +85,16 @@ export default function CotizacionApp() {
     const summaryY = doc.lastAutoTable.finalY + 30;
     doc.setFont(undefined, 'normal');
     doc.setFontSize(9);
-    doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 400, summaryY);
+    doc.text(`Subtotal: $${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  }`, 400, summaryY);
     if (logistica > 0) {
-      doc.text(`Costo logístico (${logistica}%): $${logisticaCosto.toFixed(2)}`, 400, summaryY + 14);
+      doc.text(`Costo logístico (${logistica}%): $${logisticaCosto.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    }`, 400, summaryY + 14);
     }
-    doc.text(`IVA: $${iva.toFixed(2)}`, 400, summaryY + (logistica > 0 ? 28 : 14));
-    doc.text(`Total: $${total.toFixed(2)}`, 400, summaryY + (logistica > 0 ? 42 : 28));
+    doc.text(`IVA: $${iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  }`, 400, summaryY + (logistica > 0 ? 28 : 14));
+    doc.text(`Total: $${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  }`, 400, summaryY + (logistica > 0 ? 42 : 28));
 
     const condiciones = [
       "Forma de Pago: 50 % al confirmar y el resto previa entrega",
@@ -136,7 +141,7 @@ export default function CotizacionApp() {
     doc.setTextColor(100);
     doc.text("promoalternative.com | patycastro@promoalternative.com | Tel: 55 5097 5033 | Cel: 55 4340 1291", marginX, y);
 
-    const fileName = `Cotizacion_${cliente || 'Cliente'}_${fecha || 'Fecha'}.pdf`.replace(/\s+/g, '_');
+    const fileName = `Cotizacion_${cliente || 'Cliente'}_${fechaFormat2 || 'Fecha'}.pdf`.replace(/\s+/g, '_');
     doc.save(fileName);
   };
 
